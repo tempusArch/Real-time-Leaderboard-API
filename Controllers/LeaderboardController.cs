@@ -50,10 +50,16 @@ public class LeaderboardController : ControllerBase {
         return Ok(await _leaderboardService.GetTopPlayers(gameId, page, limit, cancellationToken));
     }
 
-    [HttpGet("{gameId}")]
-    public async Task<ActionResult<ReadLeaderboardDto>> GetOnePlayer(int gameId, CancellationToken cancellationToken) {
+    [HttpGet("player/{gameId}")]
+    public async Task<ActionResult<ReadLeaderboardDto>> GetOnePlayerItself(int gameId, CancellationToken cancellationToken) {
         var userId = _httpContextService.GetCurrentUserId();
 
+        return Ok(await _leaderboardService.GetOnePlayer(gameId, userId, cancellationToken));
+    }
+
+    [HttpGet("player/{gameId}/{userId}")]
+    public async Task<ActionResult<ReadLeaderboardDto>> GetOnePlayerOthers(int gameId, int userId, CancellationToken cancellationToken) {
+        
         return Ok(await _leaderboardService.GetOnePlayer(gameId, userId, cancellationToken));
     }
 
