@@ -1,9 +1,9 @@
-# Real-time_Leaderboard_API
+# Real-time-Leaderboard-API
 
 ## Tech Stack
 - C#
 - .NET 8
-- ASP.NET Core
+- ASP.NET Core Web API
 - EF Core
 - PostgreSQL
 - AutoMapper
