@@ -24,6 +24,15 @@ public class HttpContextService {
     }
 
     public int GetCurrentUserId() {
+        var userId =_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (string.IsNullOrEmpty(userId))
+            throw new UnauthorizedAccessException("User ID claim is missing");
+
+        return int.Parse(userId);
+    }
+
+    public int GetCurrentUserIdForLogging() {
         var httpContext = _httpContextAccessor.HttpContext;
 
         if (httpContext == null || httpContext.User == null || !httpContext.User.Claims.Any())
